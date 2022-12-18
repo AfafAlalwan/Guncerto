@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MusicNote : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Vector3 SpawnPos, RemovePos;
+    int BeatsShownInAdvance;
+    int beatOfThisNote;
+    int songPosInBeats;
+
     void Start()
     {
         
@@ -13,6 +17,6 @@ public class MusicNote : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector3.Lerp( SpawnPos,RemovePos,(BeatsShownInAdvance - (beatOfThisNote - songPosInBeats)) / BeatsShownInAdvance);
     }
 }
