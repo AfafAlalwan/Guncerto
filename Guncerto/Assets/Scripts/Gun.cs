@@ -9,12 +9,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Gun : MonoBehaviour
 {
-    public Vector3 upRecoil;
-    private Vector3 originalRot;
-    public bool isRecoilOn = false;
-    public VisualEffect muzzleFlashVFX;
+    public Image AmmoImage;
     public Text AmmoText;
+    public Animator GunRecoilAnim;
     public ActionBasedController controller;
+
+    ScoreManager scoreManager;
+
+    public bool isRecoilOn = false;
+    public VisualEffect muzzleFlashVFX;   
 
     public GameObject Muzzle;
     public float maxAmmo;
@@ -29,8 +32,9 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalRot = transform.localEulerAngles;
+        scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
         currentAmmo = maxAmmo;
+        AmmoImage.fillAmount = currentAmmo / maxAmmo;
         AmmoText.text = currentAmmo.ToString();
         nextTimeToShoot = 20f;
     }
@@ -38,15 +42,14 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isRecoilOn)
-        {
-            AddRecoil();
-            isRecoilOn = false;
+        if (isReloading)
+        {          
+            if (AmmoImage.fillAmount < 1)
+            {
+                AmmoImage.fillAmount += Time.deltaTime / reloadTime ;
+            }
         }
-        else
-        {
-            StopRecoil();
-        }
+        
         nextTimeToShoot += Time.deltaTime;
         controller.activateAction.action.performed += Action_performed;//This gets the input from assigned controller(press something after += to auto complete)
         controller.selectAction.action.performed += Action_performed2;
@@ -62,9 +65,7 @@ public class Gun : MonoBehaviour
                 nextTimeToShoot = 0f;
                 //decrease ammo counter on screen here
             }
-
-        }
-
+        }       
     }
     private void Action_performed2(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -76,16 +77,22 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
+        GunRecoilAnim.SetTrigger("IsRecoilOn");
         isRecoilOn = true;
         muzzleFlashVFX.Play(); //Play muzzle flash vfx
         currentAmmo--; //Decrease current ammo
         AmmoText.text = currentAmmo.ToString();
+        AmmoImage.fillAmount = currentAmmo / maxAmmo;
         RaycastHit hit;
         if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit))//Send a hit from Muzzle 
         {
-            if (hit.transform.GetComponent<BoxCollider>()) //This can be changed later or can add more colliders for more points
+            if (hit.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
             {
-                Debug.Log(hit.transform.name);
+                scoreManager.score += 5;
+            }
+            else if (hit.collider.gameObject.name == "InnerCollider")
+            {
+                scoreManager.score += 15;
             }
 
         }
@@ -93,17 +100,11 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        AmmoImage.fillAmount = 0;
+
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         AmmoText.text = currentAmmo.ToString();
         isReloading = false;
-    }
-    void AddRecoil()
-    {
-        transform.localEulerAngles += upRecoil;
-    }
-    void StopRecoil()
-    {
-        transform.localEulerAngles = originalRot;
     }
 }
