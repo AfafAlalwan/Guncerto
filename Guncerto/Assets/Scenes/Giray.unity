@@ -169,7 +169,7 @@ PrefabInstance:
         type: 3}
       propertyPath: AmmoText
       value: 
-      objectReference: {fileID: 1763515260}
+      objectReference: {fileID: 658054280}
     - target: {fileID: 592091698414418506, guid: 0855f3fdf1e1d604694c3306d62b44a0,
         type: 3}
       propertyPath: controller
@@ -364,7 +364,7 @@ PrefabInstance:
         type: 3}
       propertyPath: AmmoText
       value: 
-      objectReference: {fileID: 2017713862}
+      objectReference: {fileID: 547696107}
     - target: {fileID: 7079545213968648127, guid: 0855f3fdf1e1d604694c3306d62b44a0,
         type: 3}
       propertyPath: controller
@@ -609,6 +609,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547696107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3522557300520837413, guid: 0855f3fdf1e1d604694c3306d62b44a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 185075372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &658054280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7411994238749676906, guid: 0855f3fdf1e1d604694c3306d62b44a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 185075372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725393154
 GameObject:
   m_ObjectHideFlags: 0
