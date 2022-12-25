@@ -65,6 +65,10 @@ public class Gun : MonoBehaviour
                 nextTimeToShoot = 0f;
                 //decrease ammo counter on screen here
             }
+            else if (currentAmmo == 0 && isReloading == false)
+            {
+                StartCoroutine(Reload());
+            }
         }       
     }
     private void Action_performed2(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -84,17 +88,35 @@ public class Gun : MonoBehaviour
         AmmoText.text = currentAmmo.ToString();
         AmmoImage.fillAmount = currentAmmo / maxAmmo;
         RaycastHit hit;
-        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit))//Send a hit from Muzzle 
+        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit, 30))//Send a hit from Muzzle 
         {
             if (hit.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
             {
-                scoreManager.score += 5;
+                scoreManager.AddScore(10);
+                scoreManager.combo++;
+                
             }
             else if (hit.collider.gameObject.name == "InnerCollider")
             {
-                scoreManager.score += 15;
+                scoreManager.AddScore(20);
+                scoreManager.combo++;
             }
+            else if(hit.collider.gameObject.name != "InnerCollider" && hit.collider.gameObject.name != "OuterCollider")
+            {
+                scoreManager.combo = 1;
+                scoreManager.score -= 10;
+            }
+            //else 
+            //{
+            //    scoreManager.combo = 1;
+            //    scoreManager.score -= 10;
+            //}
 
+        }
+        else
+        {
+            scoreManager.combo = 1;
+            scoreManager.score -= 10;
         }
     }
     IEnumerator Reload()
