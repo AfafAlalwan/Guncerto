@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 48149a77782b45045a17d1c9f2dedff8
+guid: 3ba1d67d376e45b46a6aa1e4eb720aac
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -12,8 +12,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: pistol
-    second: {fileID: 2100000, guid: 3c4ed2ebb8ee4f8479cce6888864fd31, type: 2}
+      name: shotty
+    second: {fileID: 2100000, guid: f3ba43c7a2c3f12419d9b2f37459afba, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
