@@ -9,6 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Gun : MonoBehaviour
 {
+   
     public Image AmmoImage;
     public Text AmmoText;
     public Animator GunRecoilAnim;
@@ -51,7 +52,7 @@ public class Gun : MonoBehaviour
         }
         
         nextTimeToShoot += Time.deltaTime;
-        controller.activateAction.action.performed += Action_performed;//This gets the input from assigned controller(press something after += to auto complete)
+        controller.activateAction.action.performed += Action_performed;//This gets the input from assigned controller(press tab tab after += to auto complete)
         controller.selectAction.action.performed += Action_performed2;
     }
 
@@ -87,25 +88,60 @@ public class Gun : MonoBehaviour
         currentAmmo--; //Decrease current ammo
         AmmoText.text = currentAmmo.ToString();
         AmmoImage.fillAmount = currentAmmo / maxAmmo;
-        RaycastHit hit;
-        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit, 30))//Send a hit from Muzzle 
+        bool hit1Hit;
+        bool hit2Hit = false;
+        RaycastHit hit1;
+        RaycastHit hit2;
+        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit2, 30))//Send a hit from Muzzle for HitPlane
         {
-            if (hit.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
+            if (hit2.collider.gameObject.name == "HitPlane")
             {
-                scoreManager.AddScore(10);
-                scoreManager.combo++;
-                
+                hit2Hit = true;
+
             }
-            else if (hit.collider.gameObject.name == "InnerCollider")
+            else
             {
-                scoreManager.AddScore(20);
-                scoreManager.combo++;
+                hit2Hit = false;
             }
-            else if(hit.collider.gameObject.name != "InnerCollider" && hit.collider.gameObject.name != "OuterCollider")
+        }
+        else
+        {
+            hit2Hit = false;
+        }
+        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit1, 30, LayerMask.GetMask("Box")))//Send a hit from Muzzle 
+        {
+            if (hit1.collider.gameObject.name == "OuterCollider" ) //This can be changed to hit.collider.gameObject.name or hit.collider.tag
             {
-                scoreManager.combo = 1;
-                scoreManager.score -= 10;
+                if (hit2Hit == true)
+                {
+                    scoreManager.AddScore(10);
+                    scoreManager.combo++;
+                }
+                else
+                {
+                    scoreManager.combo = 1;
+                    scoreManager.score -= 10;
+                }
+
             }
+            else if (hit1.collider.gameObject.name == "InnerCollider" && hit2Hit == true)
+            {
+                if (hit2Hit == true)
+                {
+                    scoreManager.AddScore(20);
+                    scoreManager.combo++;
+                }
+                else
+                {
+                    scoreManager.combo = 1;
+                    scoreManager.score -= 10;
+                }
+            }
+            //else if(hit1.collider.gameObject.name != "InnerCollider" && hit1.collider.gameObject.name != "OuterCollider")
+            //{
+            //    scoreManager.combo = 1;
+            //    scoreManager.score -= 10;
+            //}
             //else 
             //{
             //    scoreManager.combo = 1;
@@ -118,15 +154,20 @@ public class Gun : MonoBehaviour
             scoreManager.combo = 1;
             scoreManager.score -= 10;
         }
+        
     }
     IEnumerator Reload()
     {
-        isReloading = true;
-        AmmoImage.fillAmount = 0;
+        if (isReloading == false)
+        {
+            isReloading = true;
+            AmmoImage.fillAmount = 0;
 
-        yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
-        AmmoText.text = currentAmmo.ToString();
-        isReloading = false;
+            yield return new WaitForSeconds(reloadTime);
+            currentAmmo = maxAmmo;
+            AmmoText.text = currentAmmo.ToString();
+            isReloading = false;
+        }
+        
     }
 }
