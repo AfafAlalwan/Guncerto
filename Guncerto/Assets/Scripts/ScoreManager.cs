@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public Text scoreText;
-    public int score;
+    public float difficultyScale;
 
-    public int combo;
+    public Text scoreText;
+    public float score;
+
+    public float combo;
     public Text comboText;
 
     // Start is called before the first frame update
@@ -29,16 +31,20 @@ public class ScoreManager : MonoBehaviour
         
         if (combo >= 1 && combo <= 10)
         {
-            score += scoreToAdd * 1;
+            score += scoreToAdd * 1 * difficultyScale;
             
         }
         else if (combo > 10 && combo <= 20)
         {
-            score += scoreToAdd * 2;
+            score += scoreToAdd * 2 * difficultyScale;
         }
-        else if (combo > 20)
+        else if (combo > 20 && combo <= 30)
         {
-            score += scoreToAdd * 3;
+            score += scoreToAdd * 3 * difficultyScale;
+        }
+        else if (combo > 30)
+        {
+            score += scoreToAdd * 4 * difficultyScale;
         }
     }
 }

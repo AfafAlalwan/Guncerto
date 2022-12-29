@@ -9,7 +9,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Gun : MonoBehaviour
 {
-   
+    public Animator UIShakeAnim;
+
     public Image AmmoImage;
     public Text AmmoText;
     public Animator GunRecoilAnim;
@@ -50,7 +51,10 @@ public class Gun : MonoBehaviour
                 AmmoImage.fillAmount += Time.deltaTime / reloadTime ;
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UIShakeAnim.SetTrigger("ScoreAdded");
+        }
         nextTimeToShoot += Time.deltaTime;
         controller.activateAction.action.performed += Action_performed;//This gets the input from assigned controller(press tab tab after += to auto complete)
         controller.selectAction.action.performed += Action_performed2;
@@ -116,6 +120,7 @@ public class Gun : MonoBehaviour
                 {
                     scoreManager.AddScore(10);
                     scoreManager.combo++;
+                    UIShakeAnim.SetTrigger("ScoreAdded");
                 }
                 else
                 {
@@ -130,6 +135,7 @@ public class Gun : MonoBehaviour
                 {
                     scoreManager.AddScore(20);
                     scoreManager.combo++;
+                    UIShakeAnim.SetTrigger("ScoreAdded");
                 }
                 else
                 {
