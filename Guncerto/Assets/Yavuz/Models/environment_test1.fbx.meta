@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: c9c77ca8e24d7434fb757de15442e5e8
+guid: 80dc41a159838ad498cd31dfdc2db3cd
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pistol
-    second: {fileID: 2100000, guid: 3c4ed2ebb8ee4f8479cce6888864fd31, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
