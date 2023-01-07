@@ -96,7 +96,10 @@ MonoBehaviour:
   isShotgun: 1
   bulletsPerShot: 5
   inaccuracyDistance: 3
-  Laser: {fileID: 3930495282099921355, guid: 81d50480ee8774c49a2da5752a78aefc, type: 3}
+  HitLaser: {fileID: 3930495282099921355, guid: 81d50480ee8774c49a2da5752a78aefc,
+    type: 3}
+  AimLaser: {fileID: 3930495282099921355, guid: a09299d7df2a4374da04be2ec2b81699,
+    type: 3}
   fadeDuration: 0.3
 --- !u!120 &2879339162959188201
 LineRenderer:

@@ -22,7 +22,6 @@ public class Gun : MonoBehaviour
     MonoBehaviour camMono;
 
     [Header("General Stats")]
-    public bool isRecoilOn = false;
     public float maxAmmo;
     public float currentAmmo;//This can be made private later
     public float reloadTime;
@@ -37,13 +36,14 @@ public class Gun : MonoBehaviour
     public float inaccuracyDistance =  5;
 
     [Header("Laser")]
-    public GameObject Laser;
+    public GameObject HitLaser;
+    public GameObject AimLaser;
     public float fadeDuration = 0.3f;
 
 
     // Start is called before the first frame update
     void Start()
-    {
+    {      
         camMono = Camera.main.GetComponent<MonoBehaviour>();//Mono beh of the main camera to allow Coroutine on deactivated objects.
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
         currentAmmo = maxAmmo;
@@ -56,13 +56,14 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //CreateAimLaser(Muzzle.transform.position + Muzzle.transform.forward * range);
         laserLine.SetPosition(0, Muzzle.transform.position);
         RaycastHit laserHit;
-
-        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out laserHit, range)) //Laser 
+        if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out laserHit, range, LayerMask.GetMask("Box") + LayerMask.GetMask("Default"))) //Laser 
         {
             laserLine.SetPosition(1, laserHit.point);
         }
+
         if (isReloading)
         {          
             if (AmmoImage.fillAmount < 1)
@@ -73,6 +74,7 @@ public class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             UIShakeAnim.SetTrigger("ScoreAdded");
+            
         }
         nextTimeToShoot += Time.deltaTime;
         controller.activateAction.action.performed += Action_performed;//This gets the input from assigned controller(press tab tab after += to auto complete)
@@ -81,12 +83,17 @@ public class Gun : MonoBehaviour
 
     private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+
         if (nextTimeToShoot >= fireCoolDown)
         {
             if (currentAmmo <= maxAmmo && currentAmmo > 0 && isReloading == false)
             {
-                Shoot();
-                nextTimeToShoot = 0f;
+                if (gameObject.activeSelf)
+                {
+                    Shoot();
+                    nextTimeToShoot = 0f;
+                }
+                
                 //decrease ammo counter on screen here
             }
             else if (currentAmmo == 0 && isReloading == false)
@@ -105,17 +112,28 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
-        GunRecoilAnim.SetTrigger("IsRecoilOn");
-        isRecoilOn = true;
-        muzzleFlashVFX.Play(); //Play muzzle flash vfx
-        currentAmmo--; //Decrease current ammo
-        AmmoText.text = currentAmmo.ToString();
-        AmmoImage.fillAmount = currentAmmo / maxAmmo;
-        bool hit1Hit;
+        if (gameObject.activeSelf)
+        {
+            GunRecoilAnim.SetTrigger("IsRecoilOn");
+            muzzleFlashVFX.Play(); //Play muzzle flash vfx
+            currentAmmo--; //Decrease current ammo
+            AmmoText.text = currentAmmo.ToString();
+            AmmoImage.fillAmount = currentAmmo / maxAmmo;
+        }
+       
+        bool hit1Hit = false;
         bool hit2Hit = false;
+
+        int hitPlaneHitNo = 0;
+        int hitPlaneNoHitNo = 0;
+
+        int outerHitNo = 0;
+        int innerHitNo = 0;
+        int noHitNo = 0;
+        
         RaycastHit hit1;
         RaycastHit hit2;
-        if (isShotgun)
+        if (isShotgun && gameObject.activeSelf)
         {
             for (int i = 0; i < bulletsPerShot; i++)
             {
@@ -123,70 +141,98 @@ public class Gun : MonoBehaviour
                 {
                     if (hit2.collider.gameObject.name == "HitPlane")
                     {
-                        hit2Hit = true;
+                        //hit2Hit = true;
+                        hitPlaneHitNo++;
                     }
                     else
                     {
-                        hit2Hit = false;
+                        //hit2Hit = false;
+                        hitPlaneNoHitNo++;
                     }
+                }
+                else
+                {
+                    //hit2Hit = false;
+                    hitPlaneNoHitNo++;
+                }
+
+                if (hitPlaneHitNo >= hitPlaneNoHitNo)
+                {
+                    hit2Hit = true;
                 }
                 else
                 {
                     hit2Hit = false;
                 }
+
                 Vector3 shootingDir = GetShootingDirection();
                 if (Physics.Raycast(Muzzle.transform.position, shootingDir, out hit1, range, LayerMask.GetMask("Box")))//Send a hit from Muzzle 
                 {
-                    CreateLaser(hit1.point);
+                    
                     if (hit1.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
                     {
                         if (hit2Hit == true)
                         {
-                            scoreManager.AddScore(10);
-                            scoreManager.combo++;
-                            UIShakeAnim.SetTrigger("ScoreAdded");                            
-                           
+                            outerHitNo++;
+                            CreateHitLaser(hit1.point, "Outer");                                               
                         }
                         else
                         {
-                            scoreManager.combo = 1;
-                            scoreManager.score -= 10;
+                            noHitNo++;
+                            CreateHitLaser(hit1.point, "NoHit");
                         }
-
                     }
-                    else if (hit1.collider.gameObject.name == "InnerCollider" && hit2Hit == true)
+                    else if (hit1.collider.gameObject.name == "InnerCollider" )
                     {
                         if (hit2Hit == true)
                         {
-                            scoreManager.AddScore(20);
-                            scoreManager.combo++;
-                            UIShakeAnim.SetTrigger("ScoreAdded");
-                            
+                            innerHitNo++;
+                            CreateHitLaser(hit1.point, "Inner");
+                                                  
                         }
                         else
                         {
-                            scoreManager.combo = 1;
-                            scoreManager.score -= 10;
+                            noHitNo++;
+                            CreateHitLaser(hit1.point, "NoHit");
                         }
                     }
                 }
                 else
                 {
-                    CreateLaser(Muzzle.transform.position + shootingDir * range);
-                    scoreManager.combo = 1;
-                    scoreManager.score -= 10;
-                    
+                    noHitNo++;
+                    CreateHitLaser(Muzzle.transform.position + shootingDir * range, "NoHit");                                      
+                }               
+            }
+
+            //Actual Calculation
+            if (innerHitNo + outerHitNo >= noHitNo)//Inner hit
+            {
+                if (innerHitNo >= outerHitNo)
+                {
+                    scoreManager.AddScore(20);
+                    scoreManager.combo++;
+                    UIShakeAnim.SetTrigger("ScoreAdded");
+                }
+                else//Outer Hit
+                {
+                    scoreManager.AddScore(10);
+                    scoreManager.combo++;
+                    UIShakeAnim.SetTrigger("ScoreAdded");
                 }
             }
+            else//Nohit
+            {
+                scoreManager.combo = 1;
+                scoreManager.score -= 10;
+            }
         }
-        else
+        else if(!isShotgun && gameObject.activeSelf) //not shotgun
         {
             if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit2, range))//Send a hit from Muzzle for HitPlane
             {
                 if (hit2.collider.gameObject.name == "HitPlane")
                 {
                     hit2Hit = true;
-
                 }
                 else
                 {
@@ -199,32 +245,37 @@ public class Gun : MonoBehaviour
             }
             if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit1, range, LayerMask.GetMask("Box")))//Send a hit from Muzzle 
             {
-                CreateLaser(hit1.point);
+                
                 if (hit1.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
                 {
                     if (hit2Hit == true)
                     {
+                        CreateHitLaser(hit1.point, "Outer");
                         scoreManager.AddScore(10);
                         scoreManager.combo++;
-                        UIShakeAnim.SetTrigger("ScoreAdded");
+                        UIShakeAnim.SetTrigger("ScoreAdded");                        
                     }
                     else
                     {
+                        CreateHitLaser(hit1.point, "NoHit");
                         scoreManager.combo = 1;
                         scoreManager.score -= 10;
                     }
 
                 }
-                else if (hit1.collider.gameObject.name == "InnerCollider" && hit2Hit == true)
+                else if (hit1.collider.gameObject.name == "InnerCollider")
                 {
+                    
                     if (hit2Hit == true)
                     {
+                        CreateHitLaser(hit1.point, "Inner");
                         scoreManager.AddScore(20);
                         scoreManager.combo++;
                         UIShakeAnim.SetTrigger("ScoreAdded");
                     }
                     else
                     {
+                        CreateHitLaser(hit1.point, "NoHit");
                         scoreManager.combo = 1;
                         scoreManager.score -= 10;
                     }
@@ -232,12 +283,12 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                CreateLaser(Muzzle.transform.position + Muzzle.transform.forward * range);
+                CreateHitLaser(Muzzle.transform.position + Muzzle.transform.forward * range, "NoHit");
                 scoreManager.combo = 1;
                 scoreManager.score -= 10;
             }
         }
-        #region Shoot
+        #region Shoot Yedek
         //if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit2, range))//Send a hit from Muzzle for HitPlane
         //{
         //    if (hit2.collider.gameObject.name == "HitPlane")
@@ -303,7 +354,76 @@ public class Gun : MonoBehaviour
         //    scoreManager.score -= 10;
         //}
         #endregion
+        #region Shotgun Yedek
+        //if (isShotgun)
+        //{
+        //    for (int i = 0; i < bulletsPerShot; i++)
+        //    {
+        //        if (Physics.Raycast(Muzzle.transform.position, GetShootingDirection(), out hit2, range))//Send a hit from Muzzle for HitPlane
+        //        {
+        //            if (hit2.collider.gameObject.name == "HitPlane")
+        //            {
+        //                hit2Hit = true;
+        //            }
+        //            else
+        //            {
+        //                hit2Hit = false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            hit2Hit = false;
+        //        }
+        //        Vector3 shootingDir = GetShootingDirection();
+        //        if (Physics.Raycast(Muzzle.transform.position, shootingDir, out hit1, range, LayerMask.GetMask("Box")))//Send a hit from Muzzle 
+        //        {
 
+        //            if (hit1.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
+        //            {
+        //                if (hit2Hit == true)
+        //                {
+        //                    hit1Hit = true;
+        //                    CreateLaser(hit1.point, "Outer");
+        //                    scoreManager.AddScore(10);
+        //                    scoreManager.combo++;
+        //                    UIShakeAnim.SetTrigger("ScoreAdded");
+        //                }
+        //                else
+        //                {
+        //                    CreateLaser(hit1.point, "NoHit");
+        //                    scoreManager.combo = 1;
+        //                    scoreManager.score -= 10;
+        //                }
+        //            }
+        //            else if (hit1.collider.gameObject.name == "InnerCollider")
+        //            {
+        //                if (hit2Hit == true)
+        //                {
+        //                    hit1Hit = true;
+        //                    CreateLaser(hit1.point, "Inner");
+        //                    scoreManager.AddScore(20);
+        //                    scoreManager.combo++;
+        //                    UIShakeAnim.SetTrigger("ScoreAdded");
+
+        //                }
+        //                else
+        //                {
+        //                    CreateLaser(hit1.point, "NoHit");
+        //                    scoreManager.combo = 1;
+        //                    scoreManager.score -= 10;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            CreateLaser(Muzzle.transform.position + shootingDir * range, "NoHit");
+        //            scoreManager.combo = 1;
+        //            scoreManager.score -= 10;
+
+        //        }
+        //    }
+        //}
+        #endregion
 
     }
     IEnumerator Reload()
@@ -330,13 +450,31 @@ public class Gun : MonoBehaviour
         Vector3 direction = targetPos - Muzzle.transform.position;
         return direction.normalized;
     }
-    void CreateLaser(Vector3 end)
+    void CreateHitLaser(Vector3 end, string hitInfo)
     {
-        LineRenderer lr = Instantiate(Laser).GetComponent<LineRenderer>();
+        GameObject hitLaser = Instantiate(HitLaser);
+        LineRenderer lr = hitLaser.GetComponent<LineRenderer>();
+        if (hitInfo == "Inner")
+        {
+            lr.startColor = new Color(0, 1, 0);
+            lr.endColor = new Color(0, 0.3f, 0);
+        }
+        else if (hitInfo == "Outer")
+        {
+            lr.startColor = new Color(1, 1, 0);
+            lr.endColor = new Color(0.3f, 0.3f, 0);
+        }
+        else if (hitInfo == "NoHit")
+        {
+            lr.startColor = new Color(1, 0, 0);
+            lr.endColor = new Color(0.3f, 0, 0);
+        }
+        
         lr.SetPositions(new Vector3[2] {Muzzle.transform.position, end});
-        camMono.StartCoroutine(FadeLaser(lr));//Set the coroute on camera
+        camMono.StartCoroutine(FadeLaser(lr, hitLaser));//Set the coroute on camera
+        
     }
-    IEnumerator FadeLaser(LineRenderer lr)
+    IEnumerator FadeLaser(LineRenderer lr, GameObject hitLaser)
     {
         float alpha = 1;
         while (alpha > 0)
@@ -346,6 +484,14 @@ public class Gun : MonoBehaviour
             lr.endColor = new Color(lr.endColor.r, lr.endColor.g, lr.endColor.b, alpha);
             yield return null;
         }
+        Destroy(hitLaser);
     }
-
+    private void OnEnable()
+    {
+        nextTimeToShoot = 0.7f;
+    }
+    private void OnDisable()
+    {
+        muzzleFlashVFX.Stop(); //Stop muzzle flash vfx
+    }
 }
