@@ -31,12 +31,14 @@ public class SongManager : MonoBehaviour
     //The offset to the first beat of the song in seconds
     [SerializeField] float firstBeatOffset;
 
-    float beatsShownInAdvance;
+    [SerializeField] float beatsShownInAdvance;
 
     [SerializeField] GameObject note;
+    TargetSpawner targetSpawner;
 
     void Start()
     {
+        targetSpawner = GetComponent<TargetSpawner>();
         musicSource = GetComponent<AudioSource>();
 
         //calculate how many seconds is one beat
@@ -61,12 +63,7 @@ public class SongManager : MonoBehaviour
         if (nextIndex < notes.Length && notes[nextIndex] < songPosInBeats + beatsShownInAdvance)
         {
             // Instantiate here
-           
-            Instantiate(note, Vector3.zero, Quaternion.identity);
-            
-            Debug.Log("meow");
-            //initialize the fields of the music note
-
+            targetSpawner.SpawnTarget();
             nextIndex++;
         }
     }
