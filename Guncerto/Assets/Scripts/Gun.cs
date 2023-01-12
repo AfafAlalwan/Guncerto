@@ -133,6 +133,7 @@ public class Gun : MonoBehaviour
         
         RaycastHit hit1;
         RaycastHit hit2;
+        RaycastHit hit3;
         if (isShotgun && gameObject.activeSelf)
         {
             for (int i = 0; i < bulletsPerShot; i++)
@@ -228,20 +229,31 @@ public class Gun : MonoBehaviour
         }
         else if(!isShotgun && gameObject.activeSelf) //not shotgun
         {
-            if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit2, range))//Send a hit from Muzzle for HitPlane
+            if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit3, range))//Send a hit from Muzzle for HitPlane
+            {
+                if (hit3.collider.gameObject.name != null)
+                {
+                    Debug.Log(hit3.collider.gameObject.name);
+                }
+              
+            }
+            if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit2, range,LayerMask.GetMask("HitPlane")))//Send a hit from Muzzle for HitPlane
             {
                 if (hit2.collider.gameObject.name == "HitPlane")
                 {
                     hit2Hit = true;
+                    //Debug.Log("hitplane hit");
                 }
                 else
                 {
                     hit2Hit = false;
+                    //Debug.Log("hitplane nohit");
                 }
             }
             else
             {
                 hit2Hit = false;
+                //Debug.Log("hitplane nohit");
             }
             if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hit1, range, LayerMask.GetMask("Box")))//Send a hit from Muzzle 
             {
@@ -253,13 +265,15 @@ public class Gun : MonoBehaviour
                         CreateHitLaser(hit1.point, "Outer");
                         scoreManager.AddScore(10);
                         scoreManager.combo++;
-                        UIShakeAnim.SetTrigger("ScoreAdded");                        
+                        UIShakeAnim.SetTrigger("ScoreAdded");
+                        //Debug.Log("outer hit");
                     }
                     else
                     {
                         CreateHitLaser(hit1.point, "NoHit");
                         scoreManager.combo = 1;
                         scoreManager.score -= 10;
+                        //Debug.Log("outer no hit");
                     }
 
                 }
@@ -272,12 +286,14 @@ public class Gun : MonoBehaviour
                         scoreManager.AddScore(20);
                         scoreManager.combo++;
                         UIShakeAnim.SetTrigger("ScoreAdded");
+                        //Debug.Log("inner hit");
                     }
                     else
                     {
                         CreateHitLaser(hit1.point, "NoHit");
                         scoreManager.combo = 1;
                         scoreManager.score -= 10;
+                        //Debug.Log("inner no hit");
                     }
                 }
             }
@@ -286,6 +302,7 @@ public class Gun : MonoBehaviour
                 CreateHitLaser(Muzzle.transform.position + Muzzle.transform.forward * range, "NoHit");
                 scoreManager.combo = 1;
                 scoreManager.score -= 10;
+                //Debug.Log("no inner outer hit");
             }
         }
         #region Shoot Yedek
