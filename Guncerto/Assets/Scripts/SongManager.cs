@@ -33,7 +33,6 @@ public class SongManager : MonoBehaviour
 
     [SerializeField] float beatsShownInAdvance;
 
-    [SerializeField] GameObject note;
     TargetSpawner targetSpawner;
 
     void Start()
