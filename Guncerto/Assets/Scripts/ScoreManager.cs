@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    public GameManager gameManager;
     public float difficultyScale;
 
     public Text scoreText;
@@ -12,6 +13,9 @@ public class ScoreManager : MonoBehaviour
 
     public float combo;
     public Text comboText;
+
+    public int miss = 0;
+    public Text missText;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,7 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = score.ToString();
         comboText.text = combo.ToString();
-        
+        missText.text = (miss/2).ToString();
     }
     public void AddScore(int scoreToAdd)
     {
@@ -46,6 +50,15 @@ public class ScoreManager : MonoBehaviour
         else if (combo > 30)
         {
             score += scoreToAdd * 4 * difficultyScale;
+        }
+    }
+    public void MissCalculate()
+    {
+        miss++;
+        if (miss == 6)
+        {
+            gameManager.isGameOver = true;
+            gameManager.GameOver();
         }
     }
 }

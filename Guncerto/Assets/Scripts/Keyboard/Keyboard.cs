@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Keyboard : MonoBehaviour
 {
+    public string newName;
     public InputField inputField;
     public GameObject normalButtons;
     public GameObject capsButtons;
@@ -12,6 +13,11 @@ public class Keyboard : MonoBehaviour
     void Start()
     {
         caps = false;
+    }
+    public void EnterPressed()
+    {
+        //PlayerPrefs.SetString("PlayerName", inputField.text);
+        newName = inputField.text;
     }
     public void InsertChar(string c)
     {
@@ -21,7 +27,7 @@ public class Keyboard : MonoBehaviour
     {
         if (inputField.text.Length > 0)
         {
-            inputField.text.Substring(0, inputField.text.Length - 1);
+            inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
         }
     }
     public void InsertSpace()

@@ -10,6 +10,7 @@ using UnityEngine.Events;
 
 public class ButtonVR : MonoBehaviour
 {
+    //public GameObject button;
     public UnityEvent onPress;
     public UnityEvent onRelease;
     bool isPressed;
@@ -18,11 +19,26 @@ public class ButtonVR : MonoBehaviour
     {
         isPressed = false;
     }
- public void Release()
+
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("yes");
+        if (!isPressed)
+        {
+            //button.transform.localPosition = new Vector3(0, 0.003f, 0);
+            onPress.Invoke();
+            isPressed = true;
+        }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
 
+        
+            //button.transform.localPosition = new Vector3(0, 0.015f, 0);
+            onRelease.Invoke();
+            isPressed = false;
+        
+    }
+    
 
 }
