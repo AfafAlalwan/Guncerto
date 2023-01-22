@@ -10,6 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Gun : MonoBehaviour
 {
     [Header("References")]
+    public GunAudioManager gunAudioManager;
     public GameManager gameManager;
     public Animator UIShakeAnim;
     public Image AmmoImage;
@@ -124,6 +125,8 @@ public class Gun : MonoBehaviour
             //currentAmmo--; //Decrease current ammo
             AmmoText.text = currentAmmo.ToString();
             AmmoImage.fillAmount = currentAmmo / maxAmmo;
+            gunAudioManager.isShotgun = isShotgun;
+            gunAudioManager.PlaySound();
         }
 
         bool hit1Hit = false;
@@ -235,6 +238,7 @@ public class Gun : MonoBehaviour
                 {
                     scoreManager.score = 0;
                 }
+                scoreManager.MissCalculate();
             }
         }
         else if (!isShotgun && gameObject.activeSelf) //not shotgun
