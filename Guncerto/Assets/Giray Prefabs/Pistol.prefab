@@ -86,7 +86,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   muzzleFlashVFX: {fileID: 6203362219490109549}
   Muzzle: {fileID: 8720902137957377587}
-  isRecoilOn: 0
   maxAmmo: 20
   currentAmmo: 20
   reloadTime: 1
@@ -316,6 +315,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814602233093214386, guid: 69135bcc8efae9248b6612468664c5da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69135bcc8efae9248b6612468664c5da, type: 3}

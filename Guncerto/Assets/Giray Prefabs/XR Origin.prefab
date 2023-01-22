@@ -1815,8 +1815,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.41, y: 0.75, z: 0.55}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.09448257, y: 0.35741553, z: 0.08157597}
+  m_Center: {x: 0.012687455, y: -0.19629288, z: -0.04773722}
 --- !u!114 &1779359012976445076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2967,20 +2967,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b7f2e6244162647b76e4809990607c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponChangeAciton:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Weapon Change Aciton
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: e2adb4d5-0cb9-4970-be77-49eacc26eda1
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 5101698808175986029, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
-  controller: {fileID: 0}
+  GunChangeActionUp: {fileID: 0}
+  GunChangeActionDown: {fileID: 0}
   selectedWeapon: 0
 --- !u!1 &7977584005842092261
 GameObject:
@@ -3027,19 +3015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b7f2e6244162647b76e4809990607c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponChangeAciton:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Weapon Change Aciton
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 43d0c262-532e-4343-bcc5-b7f709319895
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  controller: {fileID: 0}
+  GunChangeActionUp: {fileID: 0}
+  GunChangeActionDown: {fileID: 0}
   selectedWeapon: 0
 --- !u!1001 &1779359011964860005
 PrefabInstance:

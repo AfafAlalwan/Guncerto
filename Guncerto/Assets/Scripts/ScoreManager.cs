@@ -25,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = score.ToString();
         comboText.text = combo.ToString();
+        
     }
     public void AddScore(int scoreToAdd)
     {
