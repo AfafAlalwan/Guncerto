@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class Loader : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class Loader : MonoBehaviour
         fadeImage.gameObject.SetActive(false);
     }
    
-    public void LoadScene(string sceneName)
+    public async void LoadScene(string sceneName)
     {
         targetScene = sceneName;
         isLoading = true;
@@ -43,6 +44,8 @@ public class Loader : MonoBehaviour
             fadeImage.DOFade(0f, 0.1f);
 
         });
+
+        await Task.Delay(500);
         StartCoroutine(LoadSceneRoutine());
 
 

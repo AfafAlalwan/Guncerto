@@ -75,7 +75,7 @@ public class SongManager : MonoBehaviour
             nextIndex++;
         }
 
-        if(songPosition >= 5f)
+        if(songPosition >= songDuration)
         {
             Loader.Instance.LoadScene("Home Scene");
         }
