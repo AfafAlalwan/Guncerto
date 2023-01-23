@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Efo's Scene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Game Scenes/Home Scene.unity
+    guid: e5d9628e080103043884aea69332506a
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Bloody Mary.unity
+    guid: 54b8cfd900bf92342ad02de5d5127f7f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9dce1c91fcb929a4aafc3d0621cf6889,
       type: 2}

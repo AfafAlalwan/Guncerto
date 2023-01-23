@@ -35,6 +35,9 @@ public class SongManager : MonoBehaviour
 
     TargetSpawner targetSpawner;
 
+    [SerializeField] float songDuration;
+
+ 
     void Start()
     {
         targetSpawner = GetComponent<TargetSpawner>();
@@ -46,6 +49,12 @@ public class SongManager : MonoBehaviour
 
         //record the time when the song starts
         dsptimesong = (float)AudioSettings.dspTime;
+
+        var guns = FindObjectsOfType<Gun>();
+        foreach (var gun in guns)
+        {
+            gun.UIMode = false;
+        }
 
         //start the song
         musicSource.Play();
@@ -64,6 +73,11 @@ public class SongManager : MonoBehaviour
             // Instantiate here
             targetSpawner.SpawnTarget();
             nextIndex++;
+        }
+
+        if(songPosition >= 5f)
+        {
+            Loader.Instance.LoadScene("Home Scene");
         }
     }
 }

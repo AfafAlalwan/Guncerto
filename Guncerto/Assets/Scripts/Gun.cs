@@ -249,6 +249,8 @@ public class Gun : MonoBehaviour
                 {
                     hitKey.transform.gameObject.GetComponent<ButtonVR>().onRelease.Invoke();
                     //hitKey.transform.gameObject.GetComponent<ButtonVR>().Release();
+
+
                     Debug.Log(hitKey.transform.gameObject.name);
                 }
             }
