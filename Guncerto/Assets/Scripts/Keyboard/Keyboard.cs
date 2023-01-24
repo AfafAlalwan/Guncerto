@@ -8,7 +8,7 @@ public class Keyboard : MonoBehaviour
     public string newName;
     public InputField inputField;
     public GameObject normalButtons;
-    public GameObject capsButtons;
+    //public GameObject capsButtons;
     private bool caps;
     void Start()
     {
@@ -39,13 +39,13 @@ public class Keyboard : MonoBehaviour
         if (!caps)
         {
             normalButtons.SetActive(false);
-            capsButtons.SetActive(true);
+            //capsButtons.SetActive(true);
             caps = true;
         }
         else
         {
             normalButtons.SetActive(true);
-            capsButtons.SetActive(false);
+            //capsButtons.SetActive(false);
             caps = false;
         }
 

@@ -10,6 +10,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Gun : MonoBehaviour
 {
     [Header("References")]
+    public GameObject pianoKeyHighlight;
+    GameObject lastSpawned;
     public GunAudioManager gunAudioManager;
     public GameManager gameManager;
     public Animator UIShakeAnim;
@@ -61,7 +63,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        //CreateAimLaser(Muzzle.transform.position + Muzzle.transform.forward * range);
+        //CreateAimLaser(Muzzle.transform.position + Muzzle.transform.forward * range);      
         laserLine.SetPosition(0, Muzzle.transform.position);
         RaycastHit laserHit;
         if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out laserHit, range, LayerMask.GetMask("Box") + LayerMask.GetMask("Default"))) //Laser 
@@ -249,7 +251,9 @@ public class Gun : MonoBehaviour
                 {
                     hitKey.transform.gameObject.GetComponent<ButtonVR>().onRelease.Invoke();
                     //hitKey.transform.gameObject.GetComponent<ButtonVR>().Release();
-                    Debug.Log(hitKey.transform.gameObject.name);
+                    //Debug.Log(hitKey.transform.gameObject.name);
+
+
                 }
             }
             else // not UI mode
@@ -516,6 +520,7 @@ public class Gun : MonoBehaviour
             isReloading = false;
         }
     }
+
     Vector3 GetShootingDirection()
     {
         Vector3 targetPos = Muzzle.transform.position + Muzzle.transform.forward * range;
