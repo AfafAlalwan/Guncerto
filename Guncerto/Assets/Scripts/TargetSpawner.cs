@@ -7,7 +7,7 @@ using System.Linq;
 public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] Transform[] lanes;
-    [SerializeField] GameObject targetPrefab;
+    [SerializeField] GameObject[] targetPrefab;
 
     Dictionary<Transform, List<Vector3>> lanesDictionary = new Dictionary<Transform, List<Vector3>>();
     List<Vector3> rotations = new List<Vector3>();
@@ -18,11 +18,20 @@ public class TargetSpawner : MonoBehaviour
    
     }
 
+    int randomLane, randomTarget, r;
     public void SpawnTarget()
     {
-        int randomLane = Random.Range(0, lanes.Length);
-        // random rotation
-        GameObject newTarget = Instantiate(targetPrefab, lanesDictionary[lanes[randomLane]][0], Quaternion.Euler(new Vector3(0, Random.Range(0, 360), Random.Range(0, 360))));
+        r = Random.Range(0, lanes.Length);
+        if (randomLane == r)
+        {
+            SpawnTarget();
+            return;
+        }
+        else
+            randomLane = r;
+
+        randomTarget = Random.Range(0, targetPrefab.Length);
+        GameObject newTarget = Instantiate(targetPrefab[randomTarget], lanesDictionary[lanes[randomLane]][0], Quaternion.Euler(new Vector3(0, Random.Range(0, 360), Random.Range(0, 360))));
         newTarget.GetComponent<MusicNote>().Movement(lanesDictionary[lanes[randomLane]].ToArray(), rotations[randomLane]);
     }
 

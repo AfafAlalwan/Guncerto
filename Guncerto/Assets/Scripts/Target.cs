@@ -8,7 +8,12 @@ public class Target : MonoBehaviour
     public bool isHit = false;
     void Start()
     {
-        scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+        try
+        {
+            scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+
+        }
+        catch { }
     }
 
     void Update()
