@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioSource gameAudoManger;
+    public AudioSource gameIdleAudoManger;
+    public AudioSource audioSource;
     public List<float> scores = new List<float>();
     public GameObject MissTrigger;
     public List<Text> LeaderTexts = new List<Text>();
@@ -22,14 +25,27 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (isGameOver)
+        {
+            if (audioSource.pitch >= 0)
+            {
+                audioSource.pitch -= 0.3f * Time.deltaTime;
+            }
+            else
+            {
+                songManager.enabled = false;
+            }
+            
+        }
     }
     public void GameOver()
     {
         leaderBoard.SubmitButton();
 
-        songManager.enabled = false;
+        //songManager.enabled = false;
 
+        gameAudoManger.Stop();
+        gameIdleAudoManger.Stop();
         MissTrigger.SetActive(false);
     }
     
