@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     public float combo;
     public Text comboText;
 
-     int miss = 0;
+    public int miss = 0;
     public int maxMiss = 6;
     public Text missText;
 
@@ -70,6 +70,11 @@ public class ScoreManager : MonoBehaviour
         {
             gameAudioManager.PlayCheerSound(1);
         }
+        if (combo % 29 == 0)
+        {
+            miss -= 2;
+            ExtraLife();
+        }
     }
     public void MissCalculate()
     {
@@ -82,14 +87,31 @@ public class ScoreManager : MonoBehaviour
         if (miss == 2)
         {
             missObjects[0].SetActive(true);
+            gameAudioManager.PlayRecordScratch();
         }
         else if (miss == 4)
         {
             missObjects[1].SetActive(true);
+            gameAudioManager.PlayRecordScratch();
         }
         else if(miss == 6)
         {
             missObjects[2].SetActive(true);
+            gameAudioManager.PlayRecordScratch();
+        }
+    }
+    public void ExtraLife()
+    {
+        if (missObjects[0].activeSelf)
+        {
+            if (missObjects[1].activeSelf)
+            {
+                missObjects[1].SetActive(false);
+            }
+            else
+            {
+                missObjects[0].SetActive(false);
+            }
         }
     }
 }

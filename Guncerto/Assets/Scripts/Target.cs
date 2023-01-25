@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public string name;
     public ScoreManager scoreManager;
+    Animator animator;
     public bool isHit = false;
     void Start()
     {
         try
         {
             scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
-
+            animator = gameObject.GetComponentInChildren<Animator>();
         }
         catch { }
     }
@@ -20,7 +22,8 @@ public class Target : MonoBehaviour
     {
         if (isHit)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            animator.SetTrigger("isHit");
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -37,4 +40,5 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

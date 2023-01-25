@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
 
     [Header("Shotgun")]
     public bool isShotgun = false;
-    public int bulletsPerShot = 5;
+    public int bulletsPerShot = 9;
     public float inaccuracyDistance = 5;
 
     [Header("Laser")]
@@ -150,7 +150,7 @@ public class Gun : MonoBehaviour
         {
             for (int i = 0; i < bulletsPerShot; i++)
             {
-                if (Physics.Raycast(Muzzle.transform.position, GetShootingDirection(), out hit2, range))//Send a hit from Muzzle for HitPlane
+                if (Physics.Raycast(Muzzle.transform.position, GetShootingDirection(), out hit2, range, LayerMask.GetMask("HitPlane")))//Send a hit from Muzzle for HitPlane
                 {
                     if (hit2.collider.gameObject.name == "HitPlane")
                     {
@@ -183,30 +183,46 @@ public class Gun : MonoBehaviour
                 {
                     if (hit1.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
                     {
-                        if (hit2Hit == true)
+                        if (hit1.collider.gameObject.GetComponentInParent<Target>().name == "Shotgun" || hit1.collider.gameObject.GetComponentInParent<Target>().name == "Default")
                         {
-                            outerHitNo++;
-                            CreateHitLaser(hit1.point, "Outer");
-                            hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                            if (hit2Hit == true)
+                            {
+                                outerHitNo++;
+                                CreateHitLaser(hit1.point, "Outer");
+                                hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                            }
+                            else
+                            {
+                                noHitNo++;
+                                CreateHitLaser(hit1.point, "NoHit");
+                            }
                         }
                         else
                         {
-                            noHitNo++;
                             CreateHitLaser(hit1.point, "NoHit");
+                            noHitNo++;
                         }
                     }
                     else if (hit1.collider.gameObject.name == "InnerCollider")
                     {
-                        if (hit2Hit == true)
+                        if (hit1.collider.gameObject.GetComponentInParent<Target>().name == "Shotgun" || hit1.collider.gameObject.GetComponentInParent<Target>().name == "Default")
                         {
-                            innerHitNo++;
-                            CreateHitLaser(hit1.point, "Inner");
-                            hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                            if (hit2Hit == true)
+                            {
+                                innerHitNo++;
+                                CreateHitLaser(hit1.point, "Inner");
+                                hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                            }
+                            else
+                            {
+                                noHitNo++;
+                                CreateHitLaser(hit1.point, "NoHit");
+                            }
                         }
                         else
                         {
-                            noHitNo++;
                             CreateHitLaser(hit1.point, "NoHit");
+                            noHitNo++;
                         }
                     }
                 }
@@ -278,6 +294,7 @@ public class Gun : MonoBehaviour
                     {
                         hit2Hit = true;
                         //Debug.Log("hitplane hit");
+
                     }
                     else
                     {
@@ -311,15 +328,31 @@ public class Gun : MonoBehaviour
 
                     if (hit1.collider.gameObject.name == "OuterCollider") //This can be changed to hit.collider.gameObject.name or hit.collider.tag
                     {
-                        if (hit2Hit == true)
+                        if (hit1.collider.gameObject.GetComponentInParent<Target>().name == "Pistol" || hit1.collider.gameObject.GetComponentInParent<Target>().name == "Default")
                         {
-                            CreateHitLaser(hit1.point, "Outer");
-                            scoreManager.AddScore(10);
-                            scoreManager.combo++;
-                            UIShakeAnim.SetTrigger("ScoreAdded");
-                            hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
-                            //Debug.Log("outer hit");
-                        }
+                            if (hit2Hit == true)
+                            {
+                                CreateHitLaser(hit1.point, "Outer");
+                                scoreManager.AddScore(10);
+                                scoreManager.combo++;
+                                UIShakeAnim.SetTrigger("ScoreAdded");
+                                hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                                //Debug.Log("outer hit");
+                            }
+                            else
+                            {
+                                CreateHitLaser(hit1.point, "NoHit");
+                                scoreManager.combo = 1;
+                                scoreManager.score -= 10;
+                                if (scoreManager.score < 0)
+                                {
+                                    scoreManager.score = 0;
+                                }
+                                //CheckMiss();
+                                //Debug.Log("outer no hit");
+                                scoreManager.MissCalculate();
+                            }
+                        }                      
                         else
                         {
                             CreateHitLaser(hit1.point, "NoHit");
@@ -337,15 +370,31 @@ public class Gun : MonoBehaviour
                     }
                     else if (hit1.collider.gameObject.name == "InnerCollider")
                     {
-                        if (hit2Hit == true)
+                        if (hit1.collider.gameObject.GetComponentInParent<Target>().name == "Pistol" || hit1.collider.gameObject.GetComponentInParent<Target>().name == "Default")
                         {
-                            CreateHitLaser(hit1.point, "Inner");
-                            scoreManager.AddScore(20);
-                            scoreManager.combo++;
-                            UIShakeAnim.SetTrigger("ScoreAdded");
-                            hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
-                            //Debug.Log("inner hit");
-                        }
+                            if (hit2Hit == true)
+                            {
+                                CreateHitLaser(hit1.point, "Inner");
+                                scoreManager.AddScore(20);
+                                scoreManager.combo++;
+                                UIShakeAnim.SetTrigger("ScoreAdded");
+                                hit1.collider.gameObject.GetComponentInParent<Target>().isHit = true;
+                                //Debug.Log("inner hit");
+                            }
+                            else
+                            {
+                                CreateHitLaser(hit1.point, "NoHit");
+                                scoreManager.combo = 1;
+                                scoreManager.score -= 10;
+                                if (scoreManager.score < 0)
+                                {
+                                    scoreManager.score = 0;
+                                }
+                                //Debug.Log("inner no hit");
+                                //CheckMiss();
+                                scoreManager.MissCalculate();
+                            }
+                        }                       
                         else
                         {
                             CreateHitLaser(hit1.point, "NoHit");
