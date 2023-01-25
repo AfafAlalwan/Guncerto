@@ -28,7 +28,7 @@ public class Target : MonoBehaviour
         if (other.gameObject.name == "Target Miss Trigger" && !isHit)
         {
             Debug.Log("Miss");
-            scoreManager.score -= 5;
+            scoreManager.score -= 10;
             scoreManager.combo = 1;
             if (scoreManager.score < 0)
             {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public GameAudioManager audioManager;
     public AudioSource gameAudoManger;
     public AudioSource gameIdleAudoManger;
     public AudioSource audioSource;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
         gameAudoManger.Stop();
         gameIdleAudoManger.Stop();
         MissTrigger.SetActive(false);
+
+        audioManager.PlayBooSound();
     }
     
 }

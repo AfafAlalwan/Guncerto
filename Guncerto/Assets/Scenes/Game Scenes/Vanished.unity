@@ -1364,6 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d87a32cd7f5f44395fe0ba412a954e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 290045088}
   gameAudoManger: {fileID: 290045087}
   gameIdleAudoManger: {fileID: 850348255}
   audioSource: {fileID: 666319637}
@@ -2825,7 +2826,7 @@ MonoBehaviour:
   cheerSounds:
   - {fileID: 8300000, guid: ecb1599244cd87c4394b9bdc85eb0b80, type: 3}
   - {fileID: 8300000, guid: 6dc08513f2af4024c956676cb8ed67cf, type: 3}
-  crowdIdle: {fileID: 8300000, guid: 91bec1ddf70d13d43ad0f239e220ac06, type: 3}
+  booClip: {fileID: 8300000, guid: e5b1aa740166b104f97c9e60e36bdda0, type: 3}
   applause: {fileID: 8300000, guid: d5d9930f7557c9946909a1075f4c80af, type: 3}
 --- !u!4 &290045089
 Transform:

@@ -5,10 +5,9 @@ using UnityEngine;
 public class GameAudioManager : MonoBehaviour
 {
     public AudioClip[] cheerSounds;
-    public AudioClip crowdIdle;
+    public AudioClip booClip;
     public AudioClip applause;
     AudioSource audioSource;
-    //public bool isIdlePlaying = true;
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
@@ -22,32 +21,15 @@ public class GameAudioManager : MonoBehaviour
     {
         if (!audioSource.isPlaying)
         {
-
             audioSource.clip = cheerSounds[cheerIndex];
             audioSource.Play();
-            //isIdlePlaying = false;
 
-        }
-        //else
-        //{
-        //    if (isIdlePlaying)
-        //    {
-        //        audioSource.clip = cheerSounds[cheerIndex];
-        //        audioSource.Play();
-        //        isIdlePlaying = false;
-        //    }
-        //}
-        
+        }       
     }
-    //public void PlayIdleSound()
-    //{
-    //    if (!audioSource.isPlaying)
-    //    {
-    //        audioSource.clip = crowdIdle;
-    //        audioSource.Play();
-    //        isIdlePlaying = true;
-    //    }
-        
+    public void PlayBooSound()
+    {
+        audioSource.clip = booClip;
+        audioSource.Play();
+    }
 
-    //}
 }
