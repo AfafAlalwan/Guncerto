@@ -128,7 +128,7 @@ public class Gun : MonoBehaviour
             //currentAmmo--; //Decrease current ammo
             AmmoText.text = currentAmmo.ToString();
             AmmoImage.fillAmount = currentAmmo / maxAmmo;
-            gunAudioManager.isShotgun = isShotgun;
+            //gunAudioManager.isShotgun = isShotgun;
             gunAudioManager.PlaySound();
         }
 

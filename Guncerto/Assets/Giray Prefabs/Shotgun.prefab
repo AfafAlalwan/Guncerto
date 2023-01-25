@@ -1,5 +1,155 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6994522714263067693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3226303599844568233}
+  - component: {fileID: 3133008322792465230}
+  - component: {fileID: 4839369172781773239}
+  m_Layer: 0
+  m_Name: Gun Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3226303599844568233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994522714263067693}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8720902138052449768}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3133008322792465230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994522714263067693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ee543b1403884469553af0c5974cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pistolSounds:
+  - {fileID: 8300000, guid: bb2a250fd078f104787d5d7d87c29d24, type: 3}
+  - {fileID: 8300000, guid: 342a6c74149325848947d992f28a4c48, type: 3}
+  - {fileID: 8300000, guid: 1c997987769f88843a94d53124bf8761, type: 3}
+  - {fileID: 8300000, guid: 49bb4c3674dce9e40895c8acc99e96cd, type: 3}
+  - {fileID: 8300000, guid: 41faf959117033f46ac3520ab001ee3a, type: 3}
+  - {fileID: 8300000, guid: 93b6fc174ddddbb48abc0b0f55fe5f54, type: 3}
+  shotgunSound: {fileID: 8300000, guid: 229523eba9e021d40be239ab931bcef9, type: 3}
+  isShotgun: 1
+--- !u!82 &4839369172781773239
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994522714263067693}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.15
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8720902137957377587
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +214,7 @@ Transform:
   m_Children:
   - {fileID: 1987431822365998087}
   - {fileID: 8756717750481474783}
+  - {fileID: 3226303599844568233}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,6 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d1394b05e538a4283b9e5a20719a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pianoKeyHighlight: {fileID: 0}
+  gunAudioManager: {fileID: 3133008322792465230}
+  gameManager: {fileID: 0}
   UIShakeAnim: {fileID: 0}
   AmmoImage: {fileID: 0}
   AmmoText: {fileID: 0}
@@ -86,12 +240,16 @@ MonoBehaviour:
   controller: {fileID: 0}
   muzzleFlashVFX: {fileID: 6203362219490109549}
   Muzzle: {fileID: 8720902137957377587}
+  missCount: 0
+  UIMode: 0
   maxAmmo: 5
   currentAmmo: 5
   reloadTime: 2
   range: 30
   isReloading: 0
   fireCoolDown: 1
+  hapticIntensity: 0
+  hapticDuration: 0
   isShotgun: 1
   bulletsPerShot: 5
   inaccuracyDistance: 3
