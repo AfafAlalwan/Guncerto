@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    public List<GameObject> missObjects = new List<GameObject>();
     public GameAudioManager gameAudioManager;
 
     public GameManager gameManager;
@@ -77,6 +78,18 @@ public class ScoreManager : MonoBehaviour
         {
             gameManager.isGameOver = true;
             gameManager.GameOver();
+        }
+        if (miss == 2)
+        {
+            missObjects[0].SetActive(true);
+        }
+        else if (miss == 4)
+        {
+            missObjects[1].SetActive(true);
+        }
+        else if(miss == 6)
+        {
+            missObjects[2].SetActive(true);
         }
     }
 }

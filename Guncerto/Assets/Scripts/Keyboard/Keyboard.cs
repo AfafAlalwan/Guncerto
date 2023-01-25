@@ -13,11 +13,13 @@ public class Keyboard : MonoBehaviour
     void Start()
     {
         caps = false;
+        newName = PlayerPrefs.GetString("PlayerName");
     }
     public void EnterPressed()
     {
         //PlayerPrefs.SetString("PlayerName", inputField.text);
         newName = inputField.text;
+        PlayerPrefs.SetString("PlayerName", newName);
     }
     public void InsertChar(string c)
     {

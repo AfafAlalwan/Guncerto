@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 using UnityEngine.UI;
 using TMPro;
@@ -251,8 +252,15 @@ public class Gun : MonoBehaviour
                 {
                     hitKey.transform.gameObject.GetComponent<ButtonVR>().onRelease.Invoke();
                     //hitKey.transform.gameObject.GetComponent<ButtonVR>().Release();
-                    Debug.Log(hitKey.transform.gameObject.name);
+                    //Debug.Log(hitKey.transform.gameObject.name);
 
+                }
+                if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hitKey, range))
+                {
+                    if (hitKey.collider.gameObject.name == "down")
+                    {
+                        SceneManager.LoadScene("Bloody Mary");
+                    }
                 }
             }
             else // not UI mode

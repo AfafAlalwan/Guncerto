@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public LeaderBoard leaderBoard;
     void Start()
     {
+
         //PlayerPrefs.DeleteAll();
         //GetHighScores();
     }
@@ -31,10 +32,10 @@ public class GameManager : MonoBehaviour
             {
                 audioSource.pitch -= 0.3f * Time.deltaTime;
             }
-            else
-            {
-                songManager.enabled = false;
-            }
+            //else
+            //{
+            //    songManager.enabled = false;
+            //}
             
         }
     }
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         leaderBoard.SubmitButton();
 
-        //songManager.enabled = false;
+        songManager.enabled = false;
 
         gameAudoManger.Stop();
         gameIdleAudoManger.Stop();
