@@ -20,6 +20,12 @@ public class Keyboard : MonoBehaviour
         //PlayerPrefs.SetString("PlayerName", inputField.text);
         newName = inputField.text;
         PlayerPrefs.SetString("PlayerName", newName);
+        if(newName.Length > 0)
+        {
+            MainMenu.Instance.nameEntered = true;
+            MainMenu.Instance.OnAir();
+        }
+
     }
     public void InsertChar(string c)
     {

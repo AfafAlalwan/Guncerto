@@ -2001,7 +2001,7 @@ GameObject:
   - component: {fileID: 530116866}
   - component: {fileID: 530116868}
   - component: {fileID: 530116867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Song 1 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2031,7 +2031,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530116865}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0347464, y: 0.18642044, z: 0.6480274}
@@ -2086,7 +2086,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2098,7 +2098,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4333,8 +4333,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2164260863
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    rgba: 1291845631
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.29803923}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4412,7 +4412,7 @@ GameObject:
   - component: {fileID: 749318802}
   - component: {fileID: 749318804}
   - component: {fileID: 749318803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Song 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4442,7 +4442,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749318801}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0347464, y: 0.18642044, z: 0.6480274}
@@ -4497,7 +4497,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4509,7 +4509,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -7273,8 +7273,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2164260863
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    rgba: 1291845631
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.29803923}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7443,8 +7443,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2164260863
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    rgba: 1291845631
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.29803923}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9382,8 +9382,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583790401}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.003833556, y: 0.0052790698, z: 0.013048411}
   m_Center: {x: 0.0014057553, y: 0.002816645, z: -0.004406766}
@@ -12962,10 +12962,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479efc04fff4e434c9ca0f758629eece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenAnimator: {fileID: 0}
-  leftCurtainAnimator: {fileID: 0}
-  rightCurtainAnimator: {fileID: 0}
-  playButton: {fileID: 0}
+  nameEntered: 0
+  screenAnimator: {fileID: 3917731696050827897}
+  leftCurtainAnimator: {fileID: 5747337229031244341}
+  rightCurtainAnimator: {fileID: 5747337229031244340}
+  playButton: {fileID: 1583790404}
 --- !u!1 &2087284043
 GameObject:
   m_ObjectHideFlags: 0
@@ -13277,7 +13278,7 @@ GameObject:
   - component: {fileID: 2118449507}
   - component: {fileID: 2118449509}
   - component: {fileID: 2118449508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Song 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13307,7 +13308,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118449506}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0347464, y: 0.18642044, z: 0.6480274}
@@ -13362,7 +13363,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -13374,7 +13375,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -13469,6 +13470,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938717132620738700, guid: bca19b5e4d13dbe4c93ba59659d2b152,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938717132620738700, guid: bca19b5e4d13dbe4c93ba59659d2b152,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -13488,6 +13494,12 @@ Transform:
 --- !u!4 &3917731696050827896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5468323332777129349, guid: bca19b5e4d13dbe4c93ba59659d2b152,
+    type: 3}
+  m_PrefabInstance: {fileID: 3917731696050827894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3917731696050827897 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3917731694381634608, guid: bca19b5e4d13dbe4c93ba59659d2b152,
     type: 3}
   m_PrefabInstance: {fileID: 3917731696050827894}
   m_PrefabAsset: {fileID: 0}
@@ -13573,6 +13585,18 @@ PrefabInstance:
 --- !u!4 &5747337229031244339 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5747337229471866284, guid: 8a6486cf596804549a08429b0ff52959,
+    type: 3}
+  m_PrefabInstance: {fileID: 5747337229031244338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5747337229031244340 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5747337227650287735, guid: 8a6486cf596804549a08429b0ff52959,
+    type: 3}
+  m_PrefabInstance: {fileID: 5747337229031244338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5747337229031244341 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5747337228309142201, guid: 8a6486cf596804549a08429b0ff52959,
     type: 3}
   m_PrefabInstance: {fileID: 5747337229031244338}
   m_PrefabAsset: {fileID: 0}

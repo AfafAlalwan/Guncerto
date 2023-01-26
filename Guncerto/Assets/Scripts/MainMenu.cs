@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public static MainMenu Instance;
 
     string selectedSong = string.Empty;
-    bool nameEntered = false; //TODO: make it true when name is entered and call OnAir();
+    [HideInInspector] public bool nameEntered = false; 
 
     [SerializeField] Animator screenAnimator;
     [SerializeField] Animator leftCurtainAnimator, rightCurtainAnimator;
@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
         await Task.Delay(2000);
 
         Loader.Instance.LoadScene(selectedSong);
-        
+        nameEntered = false;
     }
 
 
