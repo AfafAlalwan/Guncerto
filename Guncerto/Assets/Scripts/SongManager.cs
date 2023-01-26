@@ -82,15 +82,15 @@ public class SongManager : MonoBehaviour
             nextIndex++;
         }
 
-        if(songPosition >= songDuration)
+        if (songPosition >= songDuration)
         {
-            gameManager.GameOver();
+            gameManager.GameOver("Win");
             StartCoroutine(LoadHomeScene());
             //call game over -giray
         }
     }
 
-    IEnumerator LoadHomeScene()
+    public IEnumerator LoadHomeScene()
     {
         yield return new WaitForSeconds(3);
         Loader.Instance.LoadScene("Home Scene");
