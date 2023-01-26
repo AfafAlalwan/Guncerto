@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.XR.CoreUtils;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] ButtonVR playButton;
     TextMeshProUGUI playUI;
+
+    XROrigin origin;
 
     private void Awake()
     {
@@ -36,6 +39,9 @@ public class MainMenu : MonoBehaviour
         playButton = GetComponentInChildren<ButtonVR>();
         playUI = playButton.GetComponentInChildren<TextMeshProUGUI>();
         playUI.text = "On Air";
+        origin = FindObjectOfType<XROrigin>();
+        origin.transform.position = new Vector3(0.13f, 3.67f, 1.05f);
+        origin.transform.eulerAngles = new Vector3(0,90f,0);
     }
 
     public void SongSelection(string songName)

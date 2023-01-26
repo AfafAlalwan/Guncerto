@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.XR.CoreUtils;
+
 
 
 public class TargetSpawner : MonoBehaviour
@@ -12,10 +14,13 @@ public class TargetSpawner : MonoBehaviour
     Dictionary<Transform, List<Vector3>> lanesDictionary = new Dictionary<Transform, List<Vector3>>();
     List<Vector3> rotations = new List<Vector3>();
 
+    XROrigin origin;
     void Start()
     {
         InitLists();
-   
+        origin = FindObjectOfType<XROrigin>();
+        origin.transform.position = new Vector3(0.13f, 3.67f, 1.05f);
+        origin.transform.eulerAngles = new Vector3(0, 90f, 0);
     }
 
     int randomLane, randomTarget, r;
