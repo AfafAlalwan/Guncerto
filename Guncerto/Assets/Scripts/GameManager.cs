@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public bool win;
+    [SerializeField] Volume volume;
     public GameAudioManager audioManager;
     public AudioSource gameAudoManger;
     public AudioSource gameIdleAudoManger;
@@ -34,28 +36,36 @@ public class GameManager : MonoBehaviour
             {
                 audioSource.pitch -= 0.3f * Time.deltaTime;
             }
+            if (volume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value += 0.3f * Time.deltaTime;
+            }
             //else
             //{
             //    songManager.enabled = false;
             //}
-            
+
         }
     }
-    public void GameOver()
+    public void GameOver(string winOrLose)
     {
-        if (win)
+        isGameOver = true;
+        if (winOrLose == "Win")
         {
+            //play clap sound
 
         }
+        else if (winOrLose == "Lose")
+        {
+            songManager.enabled = false;
+            gameAudoManger.Stop();
+            gameIdleAudoManger.Stop();
+            MissTrigger.SetActive(false);
+            audioManager.PlayBooSound();
+            songManager.StartCoroutine(songManager.LoadHomeScene());
+        }
         leaderBoard.SubmitButton();
-
-        songManager.enabled = false;
-
-        gameAudoManger.Stop();
-        gameIdleAudoManger.Stop();
-        MissTrigger.SetActive(false);
-
-        audioManager.PlayBooSound();
+        
     }
     
 }

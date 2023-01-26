@@ -82,7 +82,7 @@ public class ScoreManager : MonoBehaviour
         if (miss == maxMiss)
         {
             gameManager.isGameOver = true;
-            gameManager.GameOver();
+            gameManager.GameOver("Lose");
         }
         if (miss == 2)
         {
