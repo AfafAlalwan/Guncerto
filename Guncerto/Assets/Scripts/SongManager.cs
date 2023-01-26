@@ -78,6 +78,7 @@ public class SongManager : MonoBehaviour
         if(songPosition >= songDuration)
         {
             Loader.Instance.LoadScene("Home Scene");
+            //call game over -giray
         }
     }
 }
