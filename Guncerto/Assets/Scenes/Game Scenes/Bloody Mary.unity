@@ -4341,6 +4341,9 @@ MonoBehaviour:
   - {fileID: 2402647428361400423, guid: cf85051c5d83e114896ce1d0a1e20ff5, type: 3}
   - {fileID: 7448069558775888105, guid: 20813a079d4d6604f92bef0a7bf88e61, type: 3}
   - {fileID: 8282558223889715344, guid: 43a10239da0c25742aff494317f32559, type: 3}
+  target_d: {fileID: 0}
+  target_p: {fileID: 0}
+  target_s: {fileID: 0}
 --- !u!82 &666319637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4449,6 +4452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1ef77c05e774a43923c5fd28773bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speakers: {fileID: 0}
+  gameManager: {fileID: 0}
   musicSource: {fileID: 0}
   songPosition: 0
   songPosInBeats: 0
@@ -6426,6 +6431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d87a32cd7f5f44395fe0ba412a954e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  win: 0
   audioManager: {fileID: 471364580}
   gameAudoManger: {fileID: 471364579}
   gameIdleAudoManger: {fileID: 264409274}
