@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public bool win;
     public GameAudioManager audioManager;
     public AudioSource gameAudoManger;
     public AudioSource gameIdleAudoManger;
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        if (win)
+        {
+
+        }
         leaderBoard.SubmitButton();
 
         songManager.enabled = false;

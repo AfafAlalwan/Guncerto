@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SongManager : MonoBehaviour
 {
+    [SerializeField] Animator speakers;
+    //reference to Game Manager to call GameOver() function.
+    [SerializeField] GameManager gameManager;
+
     //an AudioSource attached to this GameObject that will play the music.
     [SerializeField] AudioSource musicSource;
 
@@ -58,6 +62,8 @@ public class SongManager : MonoBehaviour
 
         //start the song
         musicSource.Play();
+
+        speakers.SetFloat("bpm", bpm / 120f);
     }
 
     void Update()
@@ -77,8 +83,15 @@ public class SongManager : MonoBehaviour
 
         if(songPosition >= songDuration)
         {
-            Loader.Instance.LoadScene("Home Scene");
+            gameManager.GameOver();
+            StartCoroutine(LoadHomeScene());
             //call game over -giray
         }
+    }
+
+    IEnumerator LoadHomeScene()
+    {
+        yield return new WaitForSeconds(3);
+        Loader.Instance.LoadScene("Home Scene");
     }
 }

@@ -11,6 +11,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Gun : MonoBehaviour
 {
     [Header("References")]
+    public VisualEffect vfx;
     public GameObject pianoKeyHighlight;
     GameObject lastSpawned;
     public GunAudioManager gunAudioManager;
@@ -67,11 +68,28 @@ public class Gun : MonoBehaviour
         //CreateAimLaser(Muzzle.transform.position + Muzzle.transform.forward * range);      
         laserLine.SetPosition(0, Muzzle.transform.position);
         RaycastHit laserHit;
+        RaycastHit laserUIHit;
         if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out laserHit, range, LayerMask.GetMask("Box") + LayerMask.GetMask("Default"))) //Laser 
         {
             laserLine.SetPosition(1, laserHit.point);
         }
+        if (SceneManager.GetActiveScene().name != "Home Scene")
+        {
+            if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out laserUIHit, range, LayerMask.GetMask("Box") + LayerMask.GetMask("Default") + LayerMask.GetMask("Key"))) //Laser for UI
+            {
+                if (laserUIHit.transform.gameObject.name == "Exit Button")
+                {
+                    UIMode = true;
+                }
+                else
+                {
+                    UIMode = false;
+                }
 
+            }
+        }
+        
+        
         if (isReloading)
         {
             if (AmmoImage.fillAmount < 1)
@@ -271,13 +289,13 @@ public class Gun : MonoBehaviour
                     //Debug.Log(hitKey.transform.gameObject.name);
 
                 }
-                if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hitKey, range))
-                {
-                    //if (hitKey.collider.gameObject.name == "Play Button")
-                    //{
-                    //    MainMenu.Instance.PlaySong();
-                    //}
-                }
+                //if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hitKey, range))
+                //{
+                //    //if (hitKey.collider.gameObject.name == "Play Button")
+                //    //{
+                //    //    MainMenu.Instance.PlaySong();
+                //    //}
+                //}
             }
             else // not UI mode
             {
@@ -595,16 +613,19 @@ public class Gun : MonoBehaviour
         {
             lr.startColor = new Color(0, 1, 0);
             lr.endColor = new Color(0, 0.3f, 0);
+            vfx.SetVector3("Color3", new Vector3(0, 1, 0));
         }
         else if (hitInfo == "Outer")
         {
             lr.startColor = new Color(1, 1, 0);
             lr.endColor = new Color(0.3f, 0.3f, 0);
+            vfx.SetVector3("Color3", new Vector3(1, 1, 0));
         }
         else if (hitInfo == "NoHit")
         {
             lr.startColor = new Color(1, 0, 0);
             lr.endColor = new Color(0.3f, 0, 0);
+            vfx.SetVector3("Color3", new Vector3(1, 0, 0));
         }
 
         lr.SetPositions(new Vector3[2] { Muzzle.transform.position, end });
