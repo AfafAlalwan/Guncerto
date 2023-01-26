@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Unity.XR.CoreUtils;
 
 
 
@@ -14,13 +13,14 @@ public class TargetSpawner : MonoBehaviour
     Dictionary<Transform, List<Vector3>> lanesDictionary = new Dictionary<Transform, List<Vector3>>();
     List<Vector3> rotations = new List<Vector3>();
 
-    XROrigin origin;
+
+    [SerializeField] GameObject target_d, target_p, target_s;
+    GameObject prefab;
     void Start()
     {
         InitLists();
-        origin = FindObjectOfType<XROrigin>();
-        //origin.transform.position = new Vector3(0.13f, 3.67f, 1.05f);
-        //origin.transform.eulerAngles = new Vector3(0, 90f, 0);
+        prefab = target_d;
+
     }
 
     int randomLane, randomTarget, r;
@@ -35,8 +35,15 @@ public class TargetSpawner : MonoBehaviour
         else
             randomLane = r;
 
-        randomTarget = Random.Range(0, targetPrefab.Length);
-        GameObject newTarget = Instantiate(targetPrefab[randomTarget], lanesDictionary[lanes[randomLane]][0], Quaternion.Euler(new Vector3(0, Random.Range(0, 360), Random.Range(0, 360))));
+        randomTarget = Random.Range(0, 20);
+        if (randomTarget == 0)
+            prefab = target_p;
+        else if (randomTarget == 1)
+            prefab = target_s;
+        else
+            prefab = target_d;
+
+        GameObject newTarget = Instantiate(prefab, lanesDictionary[lanes[randomLane]][0], Quaternion.Euler(new Vector3(0, Random.Range(0, 360), Random.Range(0, 360))));
         newTarget.GetComponent<MusicNote>().Movement(lanesDictionary[lanes[randomLane]].ToArray(), rotations[randomLane]);
     }
 

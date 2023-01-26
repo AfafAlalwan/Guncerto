@@ -12,7 +12,7 @@ public class SongManager : MonoBehaviour
     [SerializeField] AudioSource musicSource;
 
     //the current position of the song (in seconds)
-    [SerializeField] float songPosition;
+    [SerializeField] public float songPosition;
 
     //the current position of the song (in beats)
     [SerializeField] float songPosInBeats;
@@ -60,10 +60,11 @@ public class SongManager : MonoBehaviour
             gun.UIMode = false;
         }
 
+        speakers.SetFloat("bpm", bpm / 120f);
+
         //start the song
         musicSource.Play();
 
-        speakers.SetFloat("bpm", bpm / 120f);
     }
 
     void Update()
