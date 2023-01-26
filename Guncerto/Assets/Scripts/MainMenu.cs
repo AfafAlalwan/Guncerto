@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+    public static MainMenu Instance;
+
     string selectedSong = string.Empty;
     bool nameEntered = false; //TODO: make it true when name is entered and call OnAir();
 
@@ -13,7 +16,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Animator leftCurtainAnimator, rightCurtainAnimator;
 
     [SerializeField] ButtonVR playButton;
+    TextMeshProUGUI playUI;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
         var guns = FindObjectsOfType<Gun>();
@@ -23,7 +34,8 @@ public class MainMenu : MonoBehaviour
         }
 
         playButton = GetComponentInChildren<ButtonVR>();
-
+        playUI = playButton.GetComponentInChildren<TextMeshProUGUI>();
+        playUI.text = "On Air";
     }
 
     public void SongSelection(string songName)
@@ -37,7 +49,8 @@ public class MainMenu : MonoBehaviour
         if(nameEntered && !selectedSong.Equals(string.Empty))
         {
             playButton.GetComponent<BoxCollider>().enabled = true;
-            //TODO: change text 
+            playUI.text = "PLAY";
+
         }
     }
 
@@ -55,14 +68,6 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    //IEnumerator EntranceAnimation()
-    //{
 
-    //    yield return new WaitForSeconds(2f);
-
-    //    Loader.Instance.LoadScene(selectedSong);
-
-    //}
-    // implement a return back 
 
 }

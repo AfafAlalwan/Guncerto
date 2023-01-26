@@ -273,10 +273,10 @@ public class Gun : MonoBehaviour
                 }
                 if (Physics.Raycast(Muzzle.transform.position, Muzzle.transform.forward, out hitKey, range))
                 {
-                    if (hitKey.collider.gameObject.name == "down")
-                    {
-                        SceneManager.LoadScene("Bloody Mary");
-                    }
+                    //if (hitKey.collider.gameObject.name == "Play Button")
+                    //{
+                    //    MainMenu.Instance.PlaySong();
+                    //}
                 }
             }
             else // not UI mode
