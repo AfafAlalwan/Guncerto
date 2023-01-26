@@ -1026,12 +1026,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e606ed26d5196f45b88dcb94a05429a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstVerseEnd: 5
-  firstChorusEnd: 10
-  secondVerseEnd: 15
-  secondChorusEnd: 20
-  bridgeEnd: 0
-  endSong: 25
+  firstVerseEnd: 54
+  firstChorusEnd: 75
+  secondVerseEnd: 117
+  secondChorusEnd: 128
+  bridgeEnd: 152
+  endSong: 292
   LaserGroup1: {fileID: 714215062}
   LaserGroup2: {fileID: 1993479024}
   ConeGroup1: {fileID: 759969756}

@@ -152,34 +152,31 @@ public class LightsManager : MonoBehaviour
             light.GetComponent<MeshRenderer>().material.DOFade(0, 2f);
         }
 
-        StartCoroutine(Ending());
+        StartCoroutine(Bridge());
 
     }
 
     IEnumerator Bridge()
     {
-        foreach(var light in laserGroup1)
+        foreach (var light in coneGroup1)
         {
             light.GetComponent<MeshRenderer>().material.DOFade(1, 2f);
         }
 
-        while (song.songPosition <= bridgeEnd)
+        while (song.songPosition <= firstVerseEnd)
         {
-            // rotate the mother
-            foreach (var light in laserGroup1)
+            foreach (var light in coneGroup1)
             {
-                light.DOLocalRotate(new Vector3(light.localEulerAngles.x, light.localEulerAngles.y, Random.Range(100f, 200f)), 2f, RotateMode.Fast); // to do
+                light.DOLocalRotate(new Vector3(light.localEulerAngles.x, light.localEulerAngles.y, Random.Range(100f, 200f)), 2f, RotateMode.Fast);
             }
 
-  
+
             yield return new WaitForSeconds(2f);
         }
-
-        foreach (var light in laserGroup1)
+        foreach (var light in coneGroup1)
         {
             light.GetComponent<MeshRenderer>().material.DOFade(0, 2f);
         }
-
         StartCoroutine(Ending());
     }
 
