@@ -19,8 +19,8 @@ public class TargetSpawner : MonoBehaviour
     {
         InitLists();
         origin = FindObjectOfType<XROrigin>();
-        origin.transform.position = new Vector3(0.13f, 3.67f, 1.05f);
-        origin.transform.eulerAngles = new Vector3(0, 90f, 0);
+        //origin.transform.position = new Vector3(0.13f, 3.67f, 1.05f);
+        //origin.transform.eulerAngles = new Vector3(0, 90f, 0);
     }
 
     int randomLane, randomTarget, r;
