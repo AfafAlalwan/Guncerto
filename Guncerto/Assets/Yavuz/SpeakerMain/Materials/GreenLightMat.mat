@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LightTurquoiseLightMat
+  m_Name: GreenLightMat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _EMISSION
@@ -123,8 +123,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.626221, b: 0.827451, a: 0.49019608}
-    - _Color: {r: 0, g: 0.626221, b: 0.827451, a: 0.49019608}
-    - _EmissionColor: {r: 0, g: 0.70043755, b: 1.1172925, a: 1}
+    - _BaseColor: {r: 0.040492073, g: 1, b: 0.032075405, a: 0}
+    - _Color: {r: 0.04049205, g: 1, b: 0.032075405, a: 0}
+    - _EmissionColor: {r: 0, g: 0.6396204, b: 0.027043583, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
