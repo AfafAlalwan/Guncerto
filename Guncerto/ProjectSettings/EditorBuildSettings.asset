@@ -11,12 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Scenes/Bloody Mary.unity
     guid: 54b8cfd900bf92342ad02de5d5127f7f
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/Vanished.unity
+  - enabled: 0
+    path: Assets/Scenes/Game Scenes/Vanished old.unity
     guid: 5be4a874424bfcd47980a249a7a39e4a
   - enabled: 1
     path: Assets/Scenes/Game Scenes/Comics.unity
     guid: 0462ca6d227f02245a17baeaf27b0aed
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Vanished.unity
+    guid: 6b799052675a9f740a7cbc21ad2227b5
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9dce1c91fcb929a4aafc3d0621cf6889,
       type: 2}

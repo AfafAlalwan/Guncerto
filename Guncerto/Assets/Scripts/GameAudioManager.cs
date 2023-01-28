@@ -10,6 +10,7 @@ public class GameAudioManager : MonoBehaviour
     public AudioClip booClip;
     public AudioClip applause;
     public AudioClip recordScratchClip;
+    public AudioClip clap;
     AudioSource audioSource;
     void Start()
     {
@@ -48,6 +49,11 @@ public class GameAudioManager : MonoBehaviour
             PlayBooSound();
         }
         
+    }
+    public void PlayClapSound()
+    {
+        audioSource.clip = clap;
+        audioSource.Play();
     }
 
 }

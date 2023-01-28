@@ -58,11 +58,11 @@ public class ScoreManager : MonoBehaviour
         {
             score += scoreToAdd * 4 * difficultyScale;
         }
-        if (combo == 1)
+        if (combo == 10)
         {
             gameAudioManager.PlayCheerSound(0);
         }
-        else if (combo == 2)
+        else if (combo == 20)
         {
             gameAudioManager.PlayCheerSound(1);
         }
@@ -78,27 +78,57 @@ public class ScoreManager : MonoBehaviour
     }
     public void MissCalculate()
     {
-        miss++;
-        if (miss == maxMiss)
+        if (PlayerPrefs.GetString("GameDifficulty") == "Easy")
         {
-            gameManager.isGameOver = true;
-            gameManager.GameOver("Lose");
+
         }
-        if (miss == 2)
+        else if (PlayerPrefs.GetString("GameDifficulty") == "Hard")
         {
-            missObjects[0].SetActive(true);
-            gameAudioManager.PlayRecordScratch();
+            miss++;
+            if (miss == maxMiss)
+            {
+                gameManager.isGameOver = true;
+                gameManager.GameOver("Lose");
+            }
+            if (miss == 2)
+            {
+                missObjects[0].SetActive(true);
+                //gameAudioManager.PlayRecordScratch();
+            }
+            else if (miss == 4)
+            {
+                missObjects[1].SetActive(true);
+                //gameAudioManager.PlayRecordScratch();
+            }
+            else if (miss == 6)
+            {
+                missObjects[2].SetActive(true);
+                //gameAudioManager.PlayRecordScratch();
+            }
         }
-        else if (miss == 4)
-        {
-            missObjects[1].SetActive(true);
-            gameAudioManager.PlayRecordScratch();
-        }
-        else if(miss == 6)
-        {
-            missObjects[2].SetActive(true);
-            gameAudioManager.PlayRecordScratch();
-        }
+
+        //miss++;
+        //if (miss == maxMiss)
+        //{
+        //    gameManager.isGameOver = true;
+        //    gameManager.GameOver("Lose");
+        //}
+        //if (miss == 2)
+        //{
+        //    missObjects[0].SetActive(true);
+        //    //gameAudioManager.PlayRecordScratch();
+        //}
+        //else if (miss == 4)
+        //{
+        //    missObjects[1].SetActive(true);
+        //    //gameAudioManager.PlayRecordScratch();
+        //}
+        //else if (miss == 6)
+        //{
+        //    missObjects[2].SetActive(true);
+        //    //gameAudioManager.PlayRecordScratch();
+        //}
+        gameAudioManager.PlayRecordScratch();
     }
     public void ExtraLife()
     {

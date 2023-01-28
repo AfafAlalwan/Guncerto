@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SongManager : MonoBehaviour
 {
+    int doOnce = 0;
     [SerializeField] Animator speakers;
     //reference to Game Manager to call GameOver() function.
     [SerializeField] GameManager gameManager;
@@ -84,7 +85,12 @@ public class SongManager : MonoBehaviour
 
         if (songPosition >= songDuration)
         {
-            gameManager.GameOver("Win");
+            //gameManager.isGameOver = true;
+            if (doOnce == 0)
+            {
+                gameManager.GameOver("Win");
+                doOnce++;
+            }
             StartCoroutine(LoadHomeScene());
             //call game over -giray
         }
@@ -92,7 +98,9 @@ public class SongManager : MonoBehaviour
 
     public IEnumerator LoadHomeScene()
     {
+        
         yield return new WaitForSeconds(3);
+        
         Loader.Instance.LoadScene("Home Scene");
     }
 }

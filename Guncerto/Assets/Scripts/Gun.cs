@@ -612,19 +612,19 @@ public class Gun : MonoBehaviour
         if (hitInfo == "Inner")
         {
             lr.startColor = new Color(0, 1, 0);
-            lr.endColor = new Color(0, 0.3f, 0);
+            lr.endColor = new Color(0, 1, 0);
             vfx.SetVector3("Color3", new Vector3(0, 1, 0));
         }
         else if (hitInfo == "Outer")
         {
             lr.startColor = new Color(1, 1, 0);
-            lr.endColor = new Color(0.3f, 0.3f, 0);
+            lr.endColor = new Color(1, 1, 0);
             vfx.SetVector3("Color3", new Vector3(1, 1, 0));
         }
         else if (hitInfo == "NoHit")
         {
             lr.startColor = new Color(1, 0, 0);
-            lr.endColor = new Color(0.3f, 0, 0);
+            lr.endColor = new Color(1, 0, 0);
             vfx.SetVector3("Color3", new Vector3(1, 0, 0));
         }
 

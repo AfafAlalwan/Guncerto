@@ -53,7 +53,9 @@ public class GameManager : MonoBehaviour
         if (winOrLose == "Win")
         {
             //play clap sound
-
+            gameAudoManger.Stop();
+            gameIdleAudoManger.Stop();
+            audioManager.PlayClapSound();
         }
         else if (winOrLose == "Lose")
         {
